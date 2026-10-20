@@ -17,13 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
+from django.views.generic import RedirectView  # Import this at the top
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('students/', include('students.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('login/', auth_views.LoginView.as_view(), name='login'),
-    
-    # Add this line to enable the DRF login button:
     path('api-auth/', include('rest_framework.urls')),
+    
+    # Add this line at the bottom:
+    path('', RedirectView.as_view(url='students/', permanent=True)),
 ]
