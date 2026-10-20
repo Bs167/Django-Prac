@@ -1,0 +1,18 @@
+<h2>Student Directory</h2>
+<form action="{% url 'logout' %}" method="POST" style="display:inline; float:right;">
+    {% csrf_token %}
+    <button type="submit">Log Out</button>
+</form>
+<a href="{% url 'add_student' %}">+ Add Student</a>
+<!-- rest of your existing list code -->
+<hr>
+<ul>
+    {% for student in students %}
+        <li>
+            <strong>{{ student.name }}</strong> ({{ student.roll_number }}) - 
+            {{ student.course }} | {{ student.email }}
+        </li>
+    {% empty %}
+        <li>No students found in the database.</li>
+    {% endfor %}
+</ul>

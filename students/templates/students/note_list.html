@@ -1,0 +1,17 @@
+<h2>My Private Notes</h2>
+<a href="{% url 'create_note' %}">+ Add New Note</a>
+<hr>
+<ul>
+    {% for note in notes %}
+        <li>
+            <strong>{{ note.title }}</strong> - {{ note.created_at|date:"d M Y" }}
+            <br>
+            {{ note.content }}
+            <br>
+            <a href="{% url 'update_note' note.pk %}">Edit</a> | 
+            <a href="{% url 'delete_note' note.pk %}">Delete</a>
+        </li>
+    {% empty %}
+        <li>You haven't created any notes yet.</li>
+    {% endfor %}
+</ul>
